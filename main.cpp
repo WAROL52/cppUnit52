@@ -10,31 +10,43 @@ int diff(int a, int b)
 	return (a - b);
 }
 
-void test_sum_posivif(Expect<void> &expect)
+void test_sum_posivif(Expect<int> &expect)
 {
-	expect(sum(1, 2)).toBe(3);
-	expect(sum(3, 9)).toBe(12);
+	int val1 = sum(1, 2);
+	expect(val1).toBe(3).toBe(45).toBe(789);
+
+	int val2 = sum(3, 9);
+	expect(val2).toBe(12);
 }
 
-void test_sum_negatif(Expect<void> &expect)
+void test_sum_negatif(Expect<int> &expect)
 {
-	expect(sum(-1, -2)).toBe(-3);
-	expect(sum(-3, -9)).toBe(-12);
+	int val1 = sum(-1, -2);
+	expect(val1).toBe(-3);
+
+	int val2 = sum(-3, -9);
+	expect(val2).toBe(-12);
 }
 
-void test_diff_posivif(Expect<void> &expect)
+void test_diff_posivif(Expect<int> &expect)
 {
-	expect(diff(1, 2)).toBe(-1);
-	expect(diff(3, 9)).toBe(-6);
+	int val1 = diff(1, 2);
+	expect(val1).toBe(-1);
+
+	int val2 = diff(1, 2);
+	expect(val2).toBe(-6);
 }
 
-void test_diff_negatif(Expect<void> &expect)
+void test_diff_negatif(Expect<int> &expect)
 {
-	expect(diff(-1, -2)).toBe(1);
-	expect(diff(-3, -9)).toBe(6);
+	int val1 = diff(-1, -2);
+	expect(val1).toBe(1);
+
+	int val2 = diff(-3, -9);
+	expect(val2).toBe(6);
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char **argv)
 {
 	Tester tester(argc, argv);
 

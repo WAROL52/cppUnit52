@@ -4,6 +4,6 @@
 #include <iostream>
 #include "Describe/Describe.hpp"
 #include "Expect/Expect.hpp"
-int test(std::string name);
+#include "Tester/Tester.hpp"
 
 #endif // CPPUNIT_HPP

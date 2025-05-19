@@ -1,6 +1,6 @@
 NAME	=	a.out
 
-FILES	=	*.cpp
+FILES	=	main.cpp Describe/Describe.cpp Expect/Expect.cpp List/List.cpp Tester/Tester.cpp
 
 OBJ			=	$(FILES:.cpp=.o)
 CC			=	g++
@@ -12,11 +12,11 @@ RM				=	rm -rf
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "make $(NAME): OK!"
 
 %.o : %.cpp
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ)

@@ -1,18 +1,39 @@
 #include "Expect.hpp"
 
 template <typename T>
-Expect<T>::Expect(T &valueRef) : valueRef(valueRef) {}
+Expect<T>::Expect(T &valueRef) : value(valueRef) {}
 
 template <typename T>
-Expect<T>::Expect(const Expect &other) : valueRef(other.valueRef) {}
+Expect<T>::Expect()
+{
+	this->value = 0;
+}
+
+template <typename T>
+Expect<T>::Expect(const Expect &other) : value(other.value) {}
 
 template <typename T>
 Expect<T>::~Expect()
-{ // Destructeur éventuellement virtuel
+{
 }
 
 template <typename T>
 Expect<T> &Expect<T>::operator=(const Expect &other)
-{ // Operator d'affectation
+{
+	return (*this);
+}
+
+template <typename T>
+template <typename E>
+Expect<E> &Expect<T>::operator()(E &vRef)
+{
+	return Expect<E>(vRef);
+}
+
+template <typename T>
+Expect<T> &Expect<T>::toBe(const T &value)
+{
+	int result = this->value == value;
+	(void)result;
 	return (*this);
 }

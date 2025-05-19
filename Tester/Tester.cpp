@@ -1,18 +1,41 @@
 #include "Tester.hpp"
 
-Tester::Tester()
-{ // Constructeur par défaut
+Tester::Tester(int argc, char **argv)
+{
+	this->argc = argc;
+	this->argv = argv;
 }
 
 Tester::Tester(const Tester &other)
-{ // Constructeur de recopie
+{
+	this->describeList = other.describeList;
+	this->argc = other.argc;
+	this->argv = other.argv;
 }
 
 Tester::~Tester()
-{ // Destructeur éventuellement virtuel
+{
+	this->describeList.clear();
 }
 
 Tester &Tester::operator=(const Tester &other)
-{ // Operator d'affectation
+{
+	if (this != &other)
+	{
+		this->describeList = other.describeList;
+		this->argc = other.argc;
+		this->argv = other.argv;
+	}
 	return (*this);
+}
+
+void runOne(Describe &describe)
+{
+	describe.run();
+}
+
+int Tester::run()
+{
+	this->describeList.forEach(runOne);
+	return (0);
 }
