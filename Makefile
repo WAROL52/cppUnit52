@@ -28,8 +28,13 @@ fclean: clean
 
 re:	fclean all
 
-
 run:$(OBJ)
+	clear
+	@$(CC) $(CFLAGS_RUN) $(OBJ) -o $(NAME)
+	@echo "make $(NAME): OK!"
+	./$(NAME)
+
+vrun:$(OBJ)
 	clear
 	@$(CC) $(CFLAGS_RUN) $(OBJ) -o $(NAME)
 	@echo "make $(NAME): OK!"
