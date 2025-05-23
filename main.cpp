@@ -1,6 +1,6 @@
 #include "cppUnit52.hpp"
 
-int sum(int a, int b)
+/* int sum(int a, int b)
 {
 	return (a + b);
 }
@@ -28,8 +28,9 @@ void test_sum_negatif(Expect<int> &expect)
 	expect(val2).toBe(-12);
 }
 
-void test_diff_posivif(Expect<int> &expect)
+void test_diff_posivif()
 {
+	Expect<int> expect;
 	int val1 = diff(1, 2);
 	expect(val1).toBe(-1);
 
@@ -44,14 +45,14 @@ void test_diff_negatif(Expect<int> &expect)
 
 	int val2 = diff(-3, -9);
 	expect(val2).toBe(6);
-}
+} */
 
 
-/* void	test_plus(Expect<int> &expect)
+void	test_plus(Expect<int> &expect)
 {
 	int result(1 + 2);
 
-	expect(result).toBe(3).Not->toBe(4);
+	expect(result).toBe(3).toBe(4).toBe(5);
 }
 
 int main(void)
@@ -59,21 +60,23 @@ int main(void)
 	Describe	desc("test");
 
 	desc.test("une", test_plus);
+	desc.test("too", test_plus);
+	desc.run<int>();
 	return (0);
-} */
-
-
-int main(int argc, char **argv)
-{
-	Tester tester(argc, argv);
-
-	Describe &descSum = tester.describe("test somme");
-	descSum.test("valeur positif", test_sum_posivif)
-		.test("valeur negatif", test_sum_negatif);
-
-	Describe &descDiff = tester.describe("test diff");
-	descDiff.test("valeur positif", test_diff_posivif)
-		.test("valeur negatif", test_diff_negatif);
-
-	return tester.run();
 }
+
+
+// int main(int argc, char **argv)
+// {
+// 	Tester tester(argc, argv);
+
+// 	Describe &descSum = tester.describe("test somme");
+// 	descSum.test("valeur positif", test_sum_posivif)
+// 		.test("valeur negatif", test_sum_negatif);
+
+// 	Describe &descDiff = tester.describe("test diff");
+// 	descDiff.test("valeur positif", test_diff_posivif)
+// 		.test("valeur negatif", test_diff_negatif);
+
+// 	return tester.run();
+// }

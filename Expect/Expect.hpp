@@ -2,47 +2,21 @@
 # define EXPECT_HPP
 
 # include <iostream>
+# include "../utilities/Proxy/Proxy.hpp"
+
+typedef unsigned int	uint;
 
 template <typename T>
 class Expect
 {
-	/* 
-	** Intern Class	: NotProxy
-	** Description	:
-	**		la class proxy permet en quelques sorte de definir une action 
-	**		au moment de l'appel d'un attribut membre.
-	** Utility		:
-	**		Enchainement dans l'appel de la variable assignee a elle.
-	** Use case		:
-	**	```
-	**		int	test(1 + 2)
-	**		Expect<int> expect;
-	**		expect(test).Not->toBe(4);
-	**	```
-	** Limitation in implemention of NotProxy class	:
-	**		Malheureusement, il est impossible de surcharger l'[operator.]
-	**		du coup l'ecriture se fait aver la notation flechee (->) au lieu
-	**		d'un simple point (.).
-	 */
-
-	class NotProxy
-	{
-		private:
-			Expect<T>	*_att;
-
-			NotProxy(void) {}
-			NotProxy(NotProxy const &_) { (void)_; }
-			void	operator=(Expect<T> const &_) { (void)_; }
-		public:
-			NotProxy(Expect<T> *att) : _att(att) {}
-			Expect<T>	*operator->(void) {
-				this->_att->_inverse_condition = !this->_att->_inverse_condition;
-				return (this->_att);
-			}
-	};
+	private:
+		T		_value;
+		bool	_status;
+		bool	_inverse_condition;
+		uint	_nb_test;
 
 	public:
-		NotProxy	Not;
+		Proxy< Expect<T> >	Not;
 		
 		Expect();									// Constructeur par défaut
 		Expect(T &value);							// Constructeur par défaut
@@ -53,14 +27,11 @@ class Expect
 		Expect<T>	&operator()(T const &vref);		// Operator d'affectation
 		Expect<T>	&operator!(void);				// Operator d'inversion
 		
+		uint		getNbTest(void) const;
 		bool const	&getStatus(void) const;
 		Expect<T>	&toBe(T const &value);
 
-	private:
-		T		_value;
-		bool	_status;
-		bool	_inverse_condition;
-	// Membres privés
+		void		proxyAction(void);
 };
 
 # include "Expect.tpp"

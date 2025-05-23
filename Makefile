@@ -1,6 +1,6 @@
 NAME	=	a.out
 
-FILES	=	main.cpp Describe/Describe.cpp Expect/Expect.cpp List/List.cpp Tester/Tester.cpp
+FILES	=	main.cpp utilities/Log/Log.cpp
 
 OBJ			=	$(FILES:.cpp=.o)
 CC			=	g++
