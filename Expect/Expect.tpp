@@ -1,14 +1,16 @@
 template <typename T>
-Expect<T>::Expect(T &valueRef) : Not(this), _value(valueRef), _inverse_condition(false) {}
+Expect<T>::Expect(T &valueRef) 
+: Not(this), _value(valueRef), _status(false), _inverse_condition(false) {}
 
 template <typename T>
-Expect<T>::Expect() : Not(this), _inverse_condition(false)
+Expect<T>::Expect() : Not(this), _status(false), _inverse_condition(false)
 {
-	this->value = 0;
+	this->_value = 0;
 }
 
 template <typename T>
-Expect<T>::Expect(const Expect &other) : Not(this), _value(other.value), _inverse_condition(false) {}
+Expect<T>::Expect(const Expect &other)
+ : Not(this), _value(other.value), _status(false), _inverse_condition(false) {}
 
 template <typename T>
 Expect<T>::~Expect()
@@ -37,28 +39,19 @@ Expect<T> &Expect<T>::operator!(void)
 }
 
 template <typename T>
-T const	&Expect<T>::getValue(void) const
-{
-	return (this->value);
-}
-
-template <typename T>
 Expect<T> &Expect<T>::toBe(T const &value)
 {
-	int result = (
-		this->_inverse_condition ?
-			this->_value != value : this->_value == value);
-	if (result)
+	this->_status = this->_inverse_condition ?
+		this->_value != value : this->_value == value;
+	if (this->_status)
 		std::cout << "Verified" << std::endl;
 	else
 		std::cout << "Error" << std::endl;
-	(void)result;
 	return (*this);
 }
 
 template <typename T>
-std::ostream	&operator<<(std::ostream &o, Expect<T> const &_)
+bool const	&Expect<T>::getStatus(void) const
 {
-	o << _.getValue() << std::endl;
-	return (o);
+	return (this->_status);
 }

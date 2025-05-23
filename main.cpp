@@ -46,6 +46,23 @@ void test_diff_negatif(Expect<int> &expect)
 	expect(val2).toBe(6);
 }
 
+
+/* void	test_plus(Expect<int> &expect)
+{
+	int result(1 + 2);
+
+	expect(result).toBe(3).Not->toBe(4);
+}
+
+int main(void)
+{
+	Describe	desc("test");
+
+	desc.test("une", test_plus);
+	return (0);
+} */
+
+
 int main(int argc, char **argv)
 {
 	Tester tester(argc, argv);
