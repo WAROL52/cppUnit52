@@ -7,7 +7,10 @@ List<T>::List() : head(0), count(0) {}
 template <typename T>
 List<T>::List(const List<T> &other) : head(0), count(0)
 {
-	Node *current = other.head;
+	Node *current(other.head);
+
+	if (this->count)
+		this->clear();
 	while (current)
 	{
 		push_back(current->data);

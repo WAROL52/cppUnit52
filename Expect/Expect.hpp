@@ -53,11 +53,12 @@ class Expect
 		Expect<T>	&operator()(T const &vref);		// Operator d'affectation
 		Expect<T>	&operator!(void);				// Operator d'inversion
 		
+		bool const	&getStatus(void) const;
 		Expect<T>	&toBe(T const &value);
-		T const		&getValue(void) const;
 
 	private:
 		T		_value;
+		bool	_status;
 		bool	_inverse_condition;
 	// Membres privés
 };

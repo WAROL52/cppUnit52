@@ -1,5 +1,3 @@
-#include "Describe.hpp"
-
 Describe::Describe(std::string name)
 {
 	this->name = name;
@@ -25,10 +23,11 @@ Describe &Describe::operator=(const Describe &other)
 	return (*this);
 }
 
-Describe &Describe::test(std::string name, void (*func)(Expect<int> &expect))
+template <typename T>
+Describe &Describe::test(std::string name, void (*func)(Expect<T> &expect))
 {
-	(void)name;
-	(void)func;
+	std::cout << "Name : " << name << std::endl;
+	(*func)(this->expect);
 	return (*this);
 }
 
