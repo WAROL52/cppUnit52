@@ -4,7 +4,7 @@ Expect<T>::Expect(T &valueRef) :
 	_status(false),
 	_inverse_condition(false),
 	_nb_test(0),
-	Not(this)
+	Not(this, Expect<T>::notProxyAction)
 {}
 
 template <typename T>
@@ -13,7 +13,7 @@ Expect<T>::Expect() :
 	_status(false),
 	_inverse_condition(false),
 	_nb_test(0),
-	Not(this)
+	Not(this, Expect<T>::notProxyAction)
 {}
 
 template <typename T>
@@ -22,7 +22,7 @@ Expect<T>::Expect(const Expect &other) :
 	_status(other._status),
 	_inverse_condition(other._inverse_condition),
 	_nb_test(other._nb_test),
-	Not(this)
+	Not(this, Expect<T>::notProxyAction)
 {}
 
 template <typename T>
@@ -42,7 +42,7 @@ Expect<T> &Expect<T>::operator()(T const &vRef)
 	this->_status = false;
 	this->_inverse_condition = false;
 	this->_nb_test = 0;
-	this->Not = this;
+	this->Not.init(this, Expect<T>::notProxyAction);
 	return (*this);
 }
 
@@ -74,8 +74,4 @@ uint 		Expect<T>::getNbTest(void) const
 	return (this->_nb_test);
 }
 
-template <typename T>
-void	Expect<T>::proxyAction(void)
-{
-	this->_inverse_condition = !this->_inverse_condition;
-}
+

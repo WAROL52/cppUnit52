@@ -31,9 +31,10 @@ class Expect
 		bool const	&getStatus(void) const;
 		Expect<T>	&toBe(T const &value);
 
-		void		proxyAction(void);
+		static void	notProxyAction(Expect<T> *att);
 };
 
+# include "ProxyActions.tpp"
 # include "Expect.tpp"
 
 #endif // EXPECT_HPP
