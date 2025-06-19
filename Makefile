@@ -32,6 +32,6 @@ run:
 	clear
 	@$(CC) $(CFLAGS_RUN) $(FILES) -o $(NAME)
 	@echo "make $(NAME): OK!"
-	valgrind --leak-check=full --show-leak-kinds=all  ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --quiet  ./$(NAME)
 
 .PHONY: all, clean, fclean, re
