@@ -1,82 +1,35 @@
 #include "cppUnit52.hpp"
 
-/* int sum(int a, int b)
+void testFunction1()
 {
-	return (a + b);
+	std::cout << "Executing testFunction1" << std::endl;
+}
+void testFunction2()
+{
+	std::cout << "Executing testFunction2" << std::endl;
+	throw std::runtime_error("An error occurred in testFunction2");
+}
+void testFunction3()
+{
+	std::cout << "Executing testFunction3" << std::endl;
+}
+void testFunction4()
+{
+	std::cout << "Executing testFunction4" << std::endl;
 }
 
-int diff(int a, int b)
+int main(int argc, char const *argv[])
 {
-	return (a - b);
+	Tester::init(argc, argv);
+
+	TestGroup &group1 = Tester::group("Group 1");
+	TestGroup &group2 = Tester::group("Group 2");
+
+	group1.addTest("Test 1.1", testFunction1);
+	group1.addTest("Test 1.2", testFunction2);
+
+	group2.addTest("Test 2.1", testFunction3);
+	group2.addTest("Test 2.2", testFunction4);
+
+	return (Tester::run());
 }
-
-void test_sum_posivif(Expect<int> &expect)
-{
-	int val1 = sum(1, 2);
-	expect(val1).toBe(3).toBe(45).toBe(789);
-
-	int val2 = sum(3, 9);
-	expect(val2).toBe(12);
-}
-
-void test_sum_negatif(Expect<int> &expect)
-{
-	int val1 = sum(-1, -2);
-	expect(val1).toBe(-3);
-
-	int val2 = sum(-3, -9);
-	expect(val2).toBe(-12);
-}
-
-void test_diff_posivif()
-{
-	Expect<int> expect;
-	int val1 = diff(1, 2);
-	expect(val1).toBe(-1);
-
-	int val2 = diff(1, 2);
-	expect(val2).toBe(-6);
-}
-
-void test_diff_negatif(Expect<int> &expect)
-{
-	int val1 = diff(-1, -2);
-	expect(val1).toBe(1);
-
-	int val2 = diff(-3, -9);
-	expect(val2).toBe(6);
-} */
-
-
-void	test_plus(Expect<int> &expect)
-{
-	int result(1 + 2);
-
-	expect(result).toBe(3).toBe(4).toBe(5);
-}
-
-int main(void)
-{
-	Describe	desc("test");
-
-	desc.test("une", test_plus);
-	desc.test("too", test_plus);
-	desc.run<int>();
-	return (0);
-}
-
-
-// int main(int argc, char **argv)
-// {
-// 	Tester tester(argc, argv);
-
-// 	Describe &descSum = tester.describe("test somme");
-// 	descSum.test("valeur positif", test_sum_posivif)
-// 		.test("valeur negatif", test_sum_negatif);
-
-// 	Describe &descDiff = tester.describe("test diff");
-// 	descDiff.test("valeur positif", test_diff_posivif)
-// 		.test("valeur negatif", test_diff_negatif);
-
-// 	return tester.run();
-// }

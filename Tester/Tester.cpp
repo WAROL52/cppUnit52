@@ -1,41 +1,70 @@
 #include "Tester.hpp"
 
-Tester::Tester(int argc, char **argv)
-{
-	this->argc = argc;
-	this->argv = argv;
+// [Forme canonique] Implémentation de la classe Tester
+Tester *Tester::_instance = NULL;
+void Tester::init(int argc, const char **argv)
+{ // Méthode pour initialiser le testeur
+	if (_instance == NULL)
+	{
+		_instance = new Tester(argc, argv);
+	}
 }
 
-Tester::Tester(const Tester &other)
-{
-	this->describeList = other.describeList;
-	this->argc = other.argc;
-	this->argv = other.argv;
+Tester::Tester(int argc, char const *argv[])
+	: _testGroupList()
+{ // Constructeur avec paramètres
+
+	_testConfig._argc = argc;
+	_testConfig._argv = argv;
 }
 
 Tester::~Tester()
-{
-	this->describeList.clear();
+{ // Destructeur éventuellement virtuel
+	_testGroupList.clear();
 }
 
-Tester &Tester::operator=(const Tester &other)
-{
-	if (this != &other)
-	{
-		this->describeList = other.describeList;
-		this->argc = other.argc;
-		this->argv = other.argv;
-	}
-	return (*this);
-}
+// [Fin de la forme canonique] ==============================
 
-void runOne(Describe &describe)
+TestGroup &Tester::addGroup(const TestGroup &testGroup)
 {
-	describe.run();
+	return _instance->_testGroupList.add(testGroup);
 }
 
 int Tester::run()
+{ // Méthode pour exécuter tous les tests
+	Tester *tester = Tester::_instance;
+	int totalSuccess = 0;
+	if (tester == NULL)
+		return 1;
+	std::cout << "🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱\n";
+	for (size_t i = 0; i < tester->_testGroupList.size(); ++i)
+	{
+		TestGroup &group = tester->_testGroupList[i];
+		int groupSuccess = group.runTests();
+		totalSuccess += groupSuccess;
+		// group.printResults();
+	}
+	std::cout << "🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱\n";
+
+	if (_instance != NULL)
+	{
+		delete _instance; // Libère l'instance du testeur
+		_instance = NULL; // Réinitialise le pointeur à NULL
+	}
+	return totalSuccess == 0 ? 0 : 1; // Retourne 0 si tous les tests ont réussi, sinon 1
+}
+bool Tester::hasInstance()
 {
-	this->describeList.forEach(runOne);
-	return (0);
+	return (!!_instance);
+}
+
+TestGroup &Tester::group(const char *name)
+{
+	return group(std::string(name));
+}
+
+TestGroup &Tester::group(std::string name)
+{
+	TestGroup &g = addGroup(TestGroup(name));
+	return g;
 }

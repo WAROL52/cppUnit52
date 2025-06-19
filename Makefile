@@ -1,9 +1,9 @@
-NAME	=	a.out
+NAME	=	cppUnit
 
-FILES	=	main.cpp utilities/Log/Log.cpp
+FILES	=	main.cpp TestCase/TestCase.cpp TestGroup/TestGroup.cpp Tester/Tester.cpp
 
 OBJ			=	$(FILES:.cpp=.o)
-CC			=	g++
+CC			=	c++
 AR			=	ar -rcs
 CFLAGS		=	-Wall -Wextra -Werror -std=c++98
 CFLAGS_RUN	=	-g $(CFLAGS)
@@ -12,11 +12,11 @@ RM				=	rm -rf
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "make $(NAME): OK!"
 
 %.o : %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ)
@@ -28,16 +28,10 @@ fclean: clean
 
 re:	fclean all
 
-run:$(OBJ)
+run:
 	clear
-	@$(CC) $(CFLAGS_RUN) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS_RUN) $(FILES) -o $(NAME)
 	@echo "make $(NAME): OK!"
-	./$(NAME)
-
-vrun:$(OBJ)
-	clear
-	@$(CC) $(CFLAGS_RUN) $(OBJ) -o $(NAME)
-	@echo "make $(NAME): OK!"
-	valgrind --leak-check=full  ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all  ./$(NAME)
 
 .PHONY: all, clean, fclean, re
