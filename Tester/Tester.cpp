@@ -2,7 +2,7 @@
 
 // [Forme canonique] Implémentation de la classe Tester
 Tester *Tester::_instance = NULL;
-void Tester::init(int argc, const char **argv)
+void Tester::init(int argc, char const *argv[])
 { // Méthode pour initialiser le testeur
 	if (_instance == NULL)
 	{
