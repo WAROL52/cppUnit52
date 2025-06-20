@@ -21,9 +21,11 @@ public:
 	void printResults() const;					   // Méthode pour afficher les résultats des tests
 	void clear();								   // Méthode pour vider le groupe de tests
 	std::string getName() const;				   // Méthode pour obtenir le nom du groupe de tests
+	static TestGroup *getCurrentGroup();		   // Méthode statique pour obtenir le groupe de tests courant
 
 private:
 	// Membres privés
+	static TestGroup *_currentGroup; // Pointeur vers le groupe de tests courant
 	List<TestCase> _testCaseList;
 	std::string _name;
 };

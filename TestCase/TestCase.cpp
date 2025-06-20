@@ -62,6 +62,9 @@ bool TestCase::run()
 		}
 		catch (const std::exception &e)
 		{
+			std::cout << "\033[31m";		  // Change la couleur du texte en rouge
+			std::cout << "ERREUR ❌ \033[0m"; // Affiche un é
+			std::cout.flush();				  // Assure que le texte est affiché immédiatement
 			this->_success--;
 			this->_error = e.what();
 			success = false;

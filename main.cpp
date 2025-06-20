@@ -17,7 +17,8 @@ void bombazy(int age, int line)
 
 // Ajoute un test dans le groupe courant
 #define IT(testName, func) _group.addTest(testName, func)
-
+#include <iostream>
+#include <sstream>
 class Expectation
 {
 	int _actual;
@@ -34,7 +35,7 @@ public:
 		if (_actual == expected)
 		{
 			std::cout
-				<< " [✓] "
+				<< "\t\033[32m[✓] \033[0m"
 				<< _func
 				<< " ("
 				<< _file << ":" << _line << ") "
@@ -43,9 +44,12 @@ public:
 		}
 		else
 		{
-			std::cout << "  [✗] " << _actual << " != " << expected
-					  << " (" << _func << ")\n"
-					  << "      dans " << _file << ":" << _line << "\n";
+			std::stringstream ss;
+
+			ss << "  [✗] " << _actual << " != " << expected
+			   << " (" << _func << ")\n"
+			   << "      dans " << _file << ":" << _line << "\n";
+			throw std::runtime_error(ss.str());
 		}
 	}
 };
@@ -67,6 +71,8 @@ void testFunction2()
 void testFunction3()
 {
 	EXPECT(1).toBe(3);
+	EXPECT(1).toBe(1);
+	EXPECT(10).toBe(10);
 }
 
 void testFunction4()
@@ -98,6 +104,6 @@ int main(int argc, char const *argv[])
 		IT("Test 2.1", testFunction3);
 		IT("Test 2.2", testFunction4);
 	}
-
-	return (Tester::run());
+	TestGroup::
+		return (Tester::run());
 }
