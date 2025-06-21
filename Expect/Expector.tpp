@@ -101,19 +101,20 @@ void Expector<T>::printResult(const Expector &expector, const T &actual, const T
 	{
 		std::cout
 			<< "\t\033[32m[✓] \033[0m"
-			<< expector._func
-			<< " ("
-			<< expector._file << ":" << expector._line << ") "
+			// << expector._func
+			// << " ("
+			// << expector._file << ":" << expector._line << ") "
 			<< actual << " == " << expected
 			<< std::endl;
 	}
 	else
 	{
 		std::cout << "\t\033[7;31m[✗] "
-				  << expector._func
+				  << actual << " == " << expected
+				  << "  " << expector._func
 				  << " ("
 				  << expector._file << ":" << expector._line << ") "
-				  << actual << " == " << expected << "\033[0m"
+				  << "\033[0m"
 				  << std::endl;
 	}
 }

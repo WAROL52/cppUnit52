@@ -3,7 +3,7 @@
 void testFunction1()
 {
 	EXPECT(0).toBe(0);
-	EXPECT(0).toBe(-1);
+	EXPECT(0).toBe(-1).toBeGT(5);
 }
 
 void testFunction2()
