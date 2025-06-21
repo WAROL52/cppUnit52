@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-typedef void (*TestFunc)();
+typedef void (*TestFunc)(void);
 
 class TestCase
 {

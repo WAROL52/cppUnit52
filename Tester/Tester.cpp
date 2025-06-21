@@ -36,7 +36,7 @@ int Tester::run()
 	int totalSuccess = 0;
 	if (tester == NULL)
 		return 1;
-	std::cout << "🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱\n";
+	std::cout << "\n";
 	for (size_t i = 0; i < tester->_testGroupList.size(); ++i)
 	{
 		TestGroup &group = tester->_testGroupList[i];
@@ -44,7 +44,7 @@ int Tester::run()
 		totalSuccess += groupSuccess;
 		// group.printResults();
 	}
-	std::cout << "🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱🧱\n";
+	std::cout << "\n";
 
 	if (_instance != NULL)
 	{
