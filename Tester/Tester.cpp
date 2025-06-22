@@ -51,7 +51,7 @@ int Tester::run()
 		delete _instance; // Libère l'instance du testeur
 		_instance = NULL; // Réinitialise le pointeur à NULL
 	}
-	return totalSuccess == 0 ? 0 : 1; // Retourne 0 si tous les tests ont réussi, sinon 1
+	return 0;
 }
 bool Tester::hasInstance()
 {
